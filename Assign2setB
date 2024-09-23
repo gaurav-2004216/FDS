@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+
+# Task 1: Import the dataset
+url = "http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
+df_wine = pd.read_csv(url, sep=';')
+
+print("First 5 rows of wine dataset:\n", df_wine.head())
+
+# Task 2: Rescaling using Min-Max scaling without sklearn
+df_wine_min_max_scaled = df_wine.copy()
+
+# Min-Max Scaling: (X - Xmin) / (Xmax - Xmin)
+for column in df_wine_min_max_scaled.columns:
+    df_wine_min_max_scaled[column] = (df_wine_min_max_scaled[column] - df_wine_min_max_scaled[column].min()) / (df_wine_min_max_scaled[column].max() - df_wine_min_max_scaled[column].min())
+
+print("\nDataset After Min-Max Scaling:\n", df_wine_min_max_scaled.head())
+
+# Task 3: Standardization (Z-score normalization)
+df_wine_standardized = df_wine.copy()
+
+# Standardization: (X - mean) / std
+for column in df_wine_standardized.columns:
+    df_wine_standardized[column] = (df_wine_standardized[column] - df_wine_standardized[column].mean()) / df_wine_standardized[column].std()
+
+print("\nDataset After Standardization:\n", df_wine_standardized.head())
